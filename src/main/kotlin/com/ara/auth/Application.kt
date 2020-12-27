@@ -2,8 +2,8 @@ package com.ara.auth
 
 import com.ara.auth.database.databaseModule
 import com.ara.auth.event.ApplicationInitialized
+import com.ara.auth.jackson.jacksonConfigure
 import com.ara.auth.routes.registerRoutes
-import com.fasterxml.jackson.databind.SerializationFeature
 import io.ktor.application.Application
 import io.ktor.application.install
 import io.ktor.features.ContentNegotiation
@@ -20,14 +20,13 @@ fun Application.module(testing: Boolean = false) {
 
     install(ContentNegotiation) {
         jackson {
-            enable(SerializationFeature.INDENT_OUTPUT)
+            jacksonConfigure(this)
         }
     }
 
     install(Koin) {
         slf4jLogger()
         modules(
-            applicationModule,
             databaseModule(application),
         )
     }

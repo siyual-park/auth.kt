@@ -1,13 +1,21 @@
-import org.jetbrains.kotlin.gradle.dsl.Coroutines
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 val logback_version: String by project
 val ktor_version: String by project
 val kotlin_version: String by project
+val klint_version: String by project
+
+buildscript {
+    repositories {
+        maven { url = uri("https://plugins.gradle.org/m2/") }
+    }
+    dependencies {
+        classpath("org.jlleitschuh.gradle:ktlint-gradle:9.4.1")
+    }
+}
 
 plugins {
     application
     kotlin("jvm") version "1.4.21"
+    id("org.jlleitschuh.gradle.ktlint") version "9.4.1"
 }
 
 group = "com.ara"

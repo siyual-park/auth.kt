@@ -2,20 +2,24 @@ val logback_version: String by project
 val ktor_version: String by project
 val kotlin_version: String by project
 val klint_version: String by project
+val koin_version: String by project
 
 buildscript {
+    val klint_version: String by project
+
     repositories {
         maven { url = uri("https://plugins.gradle.org/m2/") }
+        jcenter()
     }
     dependencies {
-        classpath("org.jlleitschuh.gradle:ktlint-gradle:9.4.1")
+        classpath("org.jlleitschuh.gradle:ktlint-gradle:$klint_version")
     }
 }
 
 plugins {
     application
     kotlin("jvm") version "1.4.21"
-    id("org.jlleitschuh.gradle.ktlint") version "9.4.1"
+    id("org.jlleitschuh.gradle.ktlint")
 }
 
 group = "com.ara"
@@ -38,10 +42,13 @@ dependencies {
     implementation("io.ktor:ktor-server-core:$ktor_version")
     implementation("io.ktor:ktor-jackson:$ktor_version")
     testImplementation("io.ktor:ktor-server-tests:$ktor_version")
+
+    implementation("org.koin:koin-ktor:$koin_version")
+    implementation("org.koin:koin-logger-slf4j:$koin_version")
 }
 
-kotlin.sourceSets["main"].kotlin.srcDirs("src")
-kotlin.sourceSets["test"].kotlin.srcDirs("test")
+kotlin.sourceSets["main"].kotlin.srcDirs("src/main")
+kotlin.sourceSets["test"].kotlin.srcDirs("src/test")
 
 sourceSets["main"].resources.srcDirs("resources")
 sourceSets["test"].resources.srcDirs("testresources")

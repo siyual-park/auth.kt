@@ -1,6 +1,6 @@
 package com.ara.auth.routes
 
-import com.ara.auth.services.HelloService
+import com.ara.auth.service.HelloService
 import io.ktor.application.call
 import io.ktor.http.ContentType
 import io.ktor.response.respond

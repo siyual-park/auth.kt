@@ -3,6 +3,8 @@ val ktor_version: String by project
 val kotlin_version: String by project
 val klint_version: String by project
 val koin_version: String by project
+val exposed_version: String by project
+val h2_version: String by project
 
 buildscript {
     val klint_version: String by project
@@ -37,18 +39,26 @@ repositories {
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version")
-    implementation("io.ktor:ktor-server-netty:$ktor_version")
+
     implementation("ch.qos.logback:logback-classic:$logback_version")
+
+    implementation("io.ktor:ktor-server-netty:$ktor_version")
     implementation("io.ktor:ktor-server-core:$ktor_version")
     implementation("io.ktor:ktor-jackson:$ktor_version")
     testImplementation("io.ktor:ktor-server-tests:$ktor_version")
 
     implementation("org.koin:koin-ktor:$koin_version")
     implementation("org.koin:koin-logger-slf4j:$koin_version")
+
+    implementation("org.jetbrains.exposed:exposed-core:$exposed_version")
+    implementation("org.jetbrains.exposed:exposed-dao:$exposed_version")
+    implementation("org.jetbrains.exposed:exposed-jdbc:$exposed_version")
+
+    implementation("com.h2database:h2:$h2_version")
 }
 
 kotlin.sourceSets["main"].kotlin.srcDirs("src/main")
 kotlin.sourceSets["test"].kotlin.srcDirs("src/test")
 
-sourceSets["main"].resources.srcDirs("resources")
-sourceSets["test"].resources.srcDirs("testresources")
+sourceSets["main"].resources.srcDirs("src/main/resources")
+sourceSets["test"].resources.srcDirs("src/test/resources")

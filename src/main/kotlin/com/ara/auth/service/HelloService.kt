@@ -1,4 +1,4 @@
-package com.ara.auth.services
+package com.ara.auth.service
 
 interface HelloService {
     fun sayHello(): String
